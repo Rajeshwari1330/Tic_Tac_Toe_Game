@@ -140,6 +140,7 @@ function testWin()
 			then
 				echo "you can play the move here you may win if you play correctly"
                                 echo "other player be alert !!!!! you must block the current player if you dont want to loose"
+				echo "aquire any corner first if you want to make tie other wisse you may loose"
 				if [[ ${board[$3]} == o ]]
 				then
                         		winPlayer=1
@@ -152,6 +153,7 @@ function testWin()
 			then
 				echo "you can play the move here you may win if you play correctly"
                                 echo "other player be alert !!!!! you must block the current player if you dont want to loose"
+				echo "aquire any corner first if you want to make tie other wisse you may loose"
 				if [[ ${board[$2]} == x ]]
 				then
 					winComputer=1
