@@ -23,12 +23,12 @@ value=$((RANDOM%2))
 if(($value==0))
 then
 	playerValue=o
-	compValue=x
-	echo "player is assigned $playerValue and computer is assigned $compValue"
+	computerValue=x
+	echo "player is assigned $playerValue and computer is assigned $computerValue"
 else
 	playerValue=x
-	compValue=o
-	echo "player is assigned $playerValue and computer is assigned $compValue"
+	computerValue=o
+	echo "player is assigned $playerValue and computer is assigned $computerValue"
 fi
 }
 
@@ -121,7 +121,7 @@ function computerPlay()
         done
 	echo "computer choosed $place"
 	unset -v 'board[$place]'
-        board[$place]=$compValue
+        board[$place]=$computerValue
 	filled+=( $place )
 	createBoard
 	let "leftComputer=leftComputer-1"
@@ -142,6 +142,7 @@ function testWin()
                                 echo "other player be alert !!!!! you must block the current player if you dont want to loose"
 				echo "aquire any corner first if you want to make tie other wise you may loose"
 				echo "if no corner is available then aquire the corner if you want to make a tie other wise may loose"
+				echo "continue till game will be over"
 				if [[ ${board[$3]} == o ]]
 				then
                         		winPlayer=1
@@ -156,6 +157,7 @@ function testWin()
                                 echo "other player be alert !!!!! you must block the current player if you dont want to loose"
 				echo "aquire any corner first if you want to make tie other wisse you may loose"
 				echo "if no corner is available then aquire the corner if you want to make a tie other wise may loose"
+				echo "continue till game will be over"
 				if [[ ${board[$2]} == x ]]
 				then
 					winComputer=1
