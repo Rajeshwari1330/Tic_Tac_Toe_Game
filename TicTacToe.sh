@@ -15,7 +15,6 @@ function createBoard()
         echo "${board[4]} | ${board[5]} | ${board[6]}"
         echo "-----------"
         echo "${board[7]} | ${board[8]} | ${board[9]}"
-       
 }
 
 function assignValue()
@@ -23,17 +22,17 @@ function assignValue()
 value=$((RANDOM%2))
 if(($value==0))
 then
-	playerValue=0
+	playerValue=o
 	computerValue=x
 	echo "player is assigned $playerValue and computer is assigned $computerValue"
 else
 	playerValue=x
-	computerValue=0
+	computerValue=o
 	echo "player is assigned $playerValue and computer is assigned $computerValue"
 fi
 }
 
-function tossVal()
+function toss()
 {
 toss=$((RANDOM%2))
 if(($toss==0))
@@ -52,8 +51,7 @@ createBoard
 sleep 1
 assignValue
 sleep 1
-tossVal
-echo "player and computer both can think that where they will place the value"
+toss
 
 function repeatPlayerComputer()
 {
@@ -130,17 +128,74 @@ function computerPlay()
 	echo "---------------------------------------------------------------------------------"
 }
 
+winPlayer=0
+winComputer=0
+function testWin()
+{
+	if(($toss==0 || $toss==1))
+        then
+
+                if [[ ${board[$1]} == o ]]
+                then
+			if [[ ${board[$2]} == o ]]
+			then
+				if [[ ${board[$3]} == o ]]
+				then
+                        		winPlayer=1
+					winComputer=1
+				fi
+			fi
+		elif [[ ${board[$1]} == x ]]
+		then
+			if [[ ${board[$3]} == x ]]
+			then
+				if [[ ${board[$2]} == x ]]
+				then
+					winComputer=1
+					winPlayer=1
+				fi
+			fi
+		fi
+	fi
+}
+
+function checkWin()
+{
+	testWin 1 2 3
+	testWin 4 5 6
+	testWin 7 8 9
+	testWin 1 4 7
+	testWin 2 5 8
+	testWin 3 6 9
+	testWin 1 5 9
+	testWin 3 5 7
+}
+
 if(($toss==0))
 then
 	while(($leftPlayer != 1))
 	do
 		playerPlay
+		checkWin
+		if(($winPlayer==1))
+		then
+			echo "--------------player is winner-------------------"
+			exit
+		fi
 		if(($leftComputer!=2))
 		then
 			computerPlay
-		sleep 1
+			sleep 1
+			checkWin
+	                if(($winComputer==1))
+        	        then
+        	                echo "--------------------computer is winner-------------------"
+                	        exit
+                	fi
+
 		fi
 	done
+	echo "game is tie !! no one is winner"
 	echo "game is exiting"
 	exit
 else
@@ -148,11 +203,24 @@ else
 	do
 		computerPlay
 		sleep 1
+			checkWin
+			if(($winComputer==1))
+                        then
+                                echo "---------------------------computer is winner----------------------------"
+                                exit
+                        fi
 		if(($leftPlayer!=2))
 		then
 			playerPlay
+			checkWin
+			if(($winPlayer==1))
+                        then
+                                echo "-------------------------------player is winner------------------------------"
+                                exit
+                        fi
 		fi
 	done
+	echo "game is tie !! no one is winner"
 	echo "game is exiting"
 	exit
 fi
