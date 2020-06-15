@@ -14,9 +14,7 @@ function createBoard()
         echo "${board[4]} | ${board[5]} | ${board[6]}"
         echo "-----------"
         echo "${board[7]} | ${board[8]} | ${board[9]}"
- 
 }
-
 
 function assignValue()
 {
@@ -33,6 +31,17 @@ else
 fi
 }
 
+function toss()
+{
+toss=$((RANDOM%2))
+if(($toss==0))
+then
+	echo "player will play first"
+else
+	echo "computer will play first"
+fi
+}
+
 createBoard
 createBoardReset
 echo "Setting up the board and creating"
@@ -40,3 +49,6 @@ sleep 1
 createBoard
 sleep 1
 assignValue
+sleep 1
+toss
+createBoard
