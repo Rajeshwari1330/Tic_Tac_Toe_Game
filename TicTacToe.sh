@@ -23,12 +23,12 @@ value=$((RANDOM%2))
 if(($value==0))
 then
 	playerValue=o
-	computerValue=x
-	echo "player is assigned $playerValue and computer is assigned $computerValue"
+	compValue=x
+	echo "player is assigned $playerValue and computer is assigned $compValue"
 else
 	playerValue=x
-	computerValue=o
-	echo "player is assigned $playerValue and computer is assigned $computerValue"
+	compValue=o
+	echo "player is assigned $playerValue and computer is assigned $compValue"
 fi
 }
 
@@ -52,7 +52,7 @@ sleep 1
 assignValue
 sleep 1
 toss
-
+echo "COMPUTER IS PLAYING LIKE ME ONLY"
 function repeatPlayerComputer()
 {
 	for value in ${filled[@]}
@@ -121,7 +121,7 @@ function computerPlay()
         done
 	echo "computer choosed $place"
 	unset -v 'board[$place]'
-        board[$place]=$computerValue
+        board[$place]=$compValue
 	filled+=( $place )
 	createBoard
 	let "leftComputer=leftComputer-1"
