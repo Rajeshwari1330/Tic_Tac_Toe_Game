@@ -134,13 +134,12 @@ function testWin()
 {
 	if(($toss==0 || $toss==1))
         then
-
                 if [[ ${board[$1]} == o ]]
                 then
 			if [[ ${board[$2]} == o ]]
 			then
 				echo "you can play the move here you may win if you play correctly"
-				echo "other player be alert !!!!! you must block the current player if you dont want to loose"
+                                echo "other player be alert !!!!! you must block the current player if you dont want to loose"
 				if [[ ${board[$3]} == o ]]
 				then
                         		winPlayer=1
@@ -152,7 +151,7 @@ function testWin()
 			if [[ ${board[$3]} == x ]]
 			then
 				echo "you can play the move here you may win if you play correctly"
-				echo "other player be alert !!!!! you must block the current player if you dont want to loose"
+                                echo "other player be alert !!!!! you must block the current player if you dont want to loose"
 				if [[ ${board[$2]} == x ]]
 				then
 					winComputer=1
@@ -179,25 +178,26 @@ if(($toss==0))
 then
 	while(($leftPlayer != 1))
 	do
-		playerPlay
-		checkWin
-		if(($winPlayer==1))
-		then
-			echo "--------------player is winner-------------------"
-			exit
-		fi
-		if(($leftComputer!=2))
-		then
-			computerPlay
-			sleep 1
+			echo "choose from corners in condition of tie may occur"
+			playerPlay
 			checkWin
-	                if(($winComputer==1))
-        	        then
-        	                echo "--------------------computer is winner-------------------"
-                	        exit
-                	fi
+			if(($winPlayer==1))
+			then
+				echo "--------------player is winner-------------------"
+				exit
+			fi
+			if(($leftComputer!=2))
+			then
+				computerPlay
+				sleep 1
+				checkWin
+	                	if(($winComputer==1))
+        	        	then
+        	        	        echo "--------------------computer is winner-------------------"
+                	        	exit
+                		fi
 
-		fi
+			fi
 	done
 	echo "game is tie !! no one is winner"
 	echo "game is exiting"
@@ -207,7 +207,7 @@ else
 	do
 		computerPlay
 		sleep 1
-			checkWin
+		checkWin
 			if(($winComputer==1))
                         then
                                 echo "---------------------------computer is winner----------------------------"
@@ -215,13 +215,14 @@ else
                         fi
 		if(($leftPlayer!=2))
 		then
-			playerPlay
-			checkWin
-			if(($winPlayer==1))
-                        then
-                                echo "-------------------------------player is winner------------------------------"
-                                exit
-                        fi
+				echo "choose from corners in case of tie may occur"
+				playerPlay
+				checkWin
+				if(($winPlayer==1))
+                        	then
+                                	echo "-------------------------------player is winner------------------------------"
+                                	exit
+                        	fi
 		fi
 	done
 	echo "game is tie !! no one is winner"
